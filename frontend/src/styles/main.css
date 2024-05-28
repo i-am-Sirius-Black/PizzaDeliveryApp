@@ -84,3 +84,49 @@
     font-size: xx-large;
   }
 }
+
+.line-left{
+  display: inline-block;
+  width: 400px; /* Adjust as needed */
+  height: 2px;
+  margin-bottom: 0.5rem;
+  margin-right: 2rem;
+  background-color: #181818;
+}
+
+.line-right{
+  display: inline-block;
+  width: 400px; /* Adjust as needed */
+  height: 2px;
+  margin-bottom: 0.5rem;
+  margin-left: 2rem;
+  background-color: #181818;
+}
+
+.best-img{
+  transition: transform .7s ease-in-out;
+}
+.best-img:hover{
+  transform: rotate(5deg);
+}
+
+.hero-pizza{
+  transition: transform .7s ease-in-out;
+}
+.hero-pizza:hover{
+  transform: rotate(5deg);
+}
+
+
+/*Pemanent marker Font class*/
+.marker-font{
+  font-family: "Permanent Marker", cursive;
+}
+
+/*Burlow Font class*/
+.barlow-font{
+  font-family:"Barlow", sans-serif;
+}
+
+/*Roboto Font class*/
+.roboto-font{font-family: "Roboto", sans-serif;}

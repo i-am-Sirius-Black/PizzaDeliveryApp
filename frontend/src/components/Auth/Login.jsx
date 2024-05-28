@@ -12,7 +12,7 @@ function Login() {
       <Box className="w-1/2 flex items-center justify-center py-12 px-8">
         <Box className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
           <Heading as="h2" size="xl" className="text-center mb-6 font-bold">Login</Heading>
-          <Form action="/register" method="post">
+          <Form action="/login" method="post">
             <FormControl isRequired className="mb-4">
               <FormLabel className="text-sm font-semibold text-gray-600">Email</FormLabel>
               <Input type="email" placeholder="Email" />

@@ -39,10 +39,10 @@ function BestSellers() {
        <h1 className='best-seller'>Our Best Sellers</h1>
         <div className="pizza-cards flex justify-center gap-4">
           {bestSellers.map((item, index) => (
-           <div className="max-w-[250px] mb-[4rem]">
+           <div className="best-card max-w-[250px] mb-[4rem]">
             <div key={index} className='pizza-card bg-white p-6 h-[450px] rounded-3xl'>
               <div className="img-card h-[170px] w-full object-cover flex justify-center">
-              <img src={item.imgSrc} alt={item.title} className=' h-full rounded-t-lg' />
+              <img src={item.imgSrc} alt={item.title} className='best-img h-full rounded-t-lg' />
               </div>
               <div className='mt-4'>
                 <h3 className='text-2xl font-semibold'>{item.title}</h3>

@@ -9,6 +9,9 @@ import Footer from './components/Layout/Footer';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Layout from './components/Layout/Layout';
+import Menu from './pages/Menu';
+import OrderStatus from './components/UserDashboard/OrderStatus';
+import OrderSummary from './components/UserDashboard/OrderSummary';
 
 function App() {
 
@@ -26,6 +29,11 @@ function App() {
           path: 'admin',
           element: <Admin />
         },
+        ,
+        {
+          path: 'menu',
+          element: <Menu />
+        },
         {
           path: 'user',
           element: <User />
@@ -37,6 +45,16 @@ function App() {
         {
           path: 'register',
           element: <Register />
+        },
+        ,
+        {
+          path: 'orderStatus',
+          element: <OrderStatus />
+        },
+        ,
+        {
+          path: 'orderSummary',
+          element: <OrderSummary />
         },
         {
           path: '*',
