@@ -25,22 +25,22 @@ function Footer() {
 
           <div className="right-foot w-1/3 text-2xl text-white">  
               <div className="social-list flex justify-around">
-                <div className="soc-item bg-zinc-500 hover:bg-zinc-600 w-[45px] h-[45px] rounded-full flex justify-center items-center">
+                <div className="soc-item bg-zinc-500 hover:bg-zinc-600 w-[45px] h-[45px] rounded-full flex justify-center items-center transform transition-transform duration-300 hover:scale-110">
                   <a href="https://www.linkedin.com/in/javed-khan-514601171/">
                   <i class="ri-linkedin-box-fill"></i>
                   </a>
                 </div>
-                <div className="soc-item bg-zinc-500 hover:bg-zinc-600 w-[45px] h-[45px] rounded-full flex justify-center items-center">
+                <div className="soc-item bg-zinc-500 hover:bg-zinc-600 w-[45px] h-[45px] rounded-full flex justify-center items-center transform transition-transform duration-300 hover:scale-110">
                   <a href="https://github.com/i-am-Sirius-Black">
                   <i class="ri-github-fill"></i>
                   </a>
                 </div>
-                <div className="soc-item bg-zinc-500 hover:bg-zinc-600 w-[45px] h-[45px] rounded-full flex justify-center items-center">
+                <div className="soc-item bg-zinc-500 hover:bg-zinc-600 w-[45px] h-[45px] rounded-full flex justify-center items-center transform transition-transform duration-300 hover:scale-110">
                   <a href="https://twitter.com/javed_official_">
                   <i class="ri-twitter-x-fill"></i>
                   </a>
                 </div>
-                <div className="soc-item bg-zinc-500 hover:bg-zinc-600 w-[45px] h-[45px] rounded-full flex justify-center items-center">
+                <div className="soc-item bg-zinc-500 hover:bg-zinc-600 w-[45px] h-[45px] rounded-full flex justify-center items-center transform transition-transform duration-300 hover:scale-110">
                   <a href="https://www.youtube.com/channel/UCaUhBBSZ8ZjsOVGDQyhQq3Q">
                   <i class="ri-youtube-fill"></i>
                   </a>

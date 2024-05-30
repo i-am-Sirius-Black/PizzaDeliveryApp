@@ -31,7 +31,8 @@ function Login() {
               Login
             </Button>
           </Form>
-          <p className="mt-6 text-center text-sm text-gray-600">Don't have account? <a href="/register" className="text-teal-600 hover:text-teal-500 font-semibold">Sign up</a></p>
+          <p className="mt-6 text-center text-sm text-gray-600">Don't have account? <a href="/register" className="text-teal-600 hover:text-teal-500 font-semibold">Create one</a></p>
+           <p className="mt-3 text-center text-sm text-gray-600"><a href="/register" className="text-red-300 hover:text-red-500 font-semibold">Forgot Your Password?</a></p>
         </Box>
       </Box>
     </Flex>

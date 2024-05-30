@@ -10,8 +10,10 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Layout from './components/Layout/Layout';
 import Menu from './pages/Menu';
-import OrderStatus from './components/UserDashboard/OrderStatus';
-import OrderSummary from './components/UserDashboard/OrderSummary';
+import OrderStatus from './pages/OrderStatus';
+import OrderSummary from './pages/OrderSummary';
+import Checkout from './pages/Checkout';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
 
@@ -48,13 +50,23 @@ function App() {
         },
         ,
         {
-          path: 'orderStatus',
+          path: 'status',
           element: <OrderStatus />
         },
         ,
         {
-          path: 'orderSummary',
+          path: 'summary',
           element: <OrderSummary />
+        },
+        ,
+        {
+          path: 'checkout',
+          element: <Checkout />
+        },
+        ,
+        {
+          path: 'privacy-policy',
+          element: <PrivacyPolicy />
         },
         {
           path: '*',

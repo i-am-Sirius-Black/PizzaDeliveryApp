@@ -4,6 +4,7 @@ import pizzaImage2 from "../assets/images/04.png";
 import BestSellers from "../components/section/BestSellers";
 import Address from "../components/section/Address";
 import LetsConnect from "../components/section/LetsConnect";
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -22,14 +23,10 @@ function Home() {
               Savor happiness at our Pizza Bar! Enjoy handcrafted pizzas bursting with flavor. Click the button below for exclusive Happy Hour deals!
               </p>
               <div className="hero-btn text-black mt-8">
-                {/* <button className="order-btn text-sm py-3 px-5 bg-[#FBBE36]  hover:bg-[#f8aa03]  rounded-full font-bold hover:text-zinc-900 hover:shadow-xl">
-                  <i className="ri-shopping-cart-2-line pr-1 text-xl"></i>ORDER
-                  ONLINE
-                </button> */}
-                <button className="order-btn font-medium text-sm py-3 px-5 bg-[#FBBE36]  hover:bg-[#f8aa03]  rounded-full font-bold hover:text-zinc-900 hover:shadow-xl">
-                  <i className="ri-shopping-cart-2-line font-light pr-2 text-xl"></i>ORDER
-                  ONLINE
-                </button>
+              <Link to="/menu">
+                <button className="order-btn font-semibold text-sm py-3 px-5 bg-[#FBBE36] hover:bg-[#f8aa03]  rounded-full font-bold hover:text-zinc-900 hover:shadow-xl">
+                  <i className="ri-shopping-cart-2-line font-light pr-2 text-xl"></i>ORDER ONLINE</button>
+              </Link>
               </div>
             </div>
           </div>
@@ -42,7 +39,7 @@ function Home() {
               </div>
             </div> */}
             <div className="z-[2]">
-              <img src={pizzaImage} alt="pizza" className="hero-pizza w-[500px] h-auto" />
+              <img src={pizzaImage} alt="pizza" className="hero-pizza w-[500px] h-auto rounded-full" />
             </div>
             
           </div>
