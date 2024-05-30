@@ -14,6 +14,7 @@ import OrderStatus from './pages/OrderStatus';
 import OrderSummary from './pages/OrderSummary';
 import Checkout from './pages/Checkout';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import UserDashboard from './pages/UserDashboard';
 
 function App() {
 
@@ -39,6 +40,11 @@ function App() {
         {
           path: 'user',
           element: <User />
+        },
+        ,
+        {
+          path: 'user-dashboard',
+          element: <UserDashboard />
         },
         {
           path: 'login',
