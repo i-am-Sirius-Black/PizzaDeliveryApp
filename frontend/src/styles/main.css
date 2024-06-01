@@ -26,18 +26,59 @@
     bottom: 0;
     width: 100%;
   }
+  
 
-  .left-image {
-    background-image: url('https://img.freepik.com/free-vector/restaurant-mural-wallpaper_23-2148698592.jpg?w=996&t=st=1716787661~exp=1716788261~hmac=92ab6d94dcb33dc0dab20d7a9a7a25675e608d9a7e87d8fe59302001c3d18888');
-    background-size:cover;
-    background-position: left;
-    background-repeat: no-repeat;
-    border-top: solid 3px white;
-    border-bottom: solid 3px white;; 
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
+  /*Login Register Buttons*/
+ 
+  .btn-primary {
+    cursor: pointer;
+    border-radius: 9999px;
+    --tw-bg-opacity: 1;
+    background-color: #fab31b;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
 
-  }
+  .btn-secondary {
+    cursor: pointer;
+    border-radius: 9999px;
+    border-width: 1px;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
 
 
   .media-content h1{

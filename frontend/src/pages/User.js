@@ -6,10 +6,7 @@ import OrderStatus from '../components/UserDashboard/OrderStatus';
 function User() {
   return (
     <div>
-      <h1>User Dashboard</h1>
-      <PizzaSelection />
-      <OrderSummary />
-      <OrderStatus />
+      
     </div>
   );
 }

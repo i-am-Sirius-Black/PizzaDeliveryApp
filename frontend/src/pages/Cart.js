@@ -9,7 +9,7 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 
-function OrderSummary() {
+function Cart() {
   return (
     <>
       <section className="Basket">
@@ -39,7 +39,7 @@ function OrderSummary() {
                                     scope="col"
                                     class="p-5 text-left text-sm leading-6 font-semibold text-gray-900 capitalize"
                                   >
-                                    Order-summary
+                                    Summary
                                   </th>
                                   <th
                                     scope="col"
@@ -182,4 +182,4 @@ function OrderSummary() {
   );
 }
 
-export default OrderSummary;
+export default Cart;
