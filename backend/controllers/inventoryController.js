@@ -46,7 +46,6 @@ export const updateInventory = async (req, res) => {
 
 export const addInventoryItem = async (req, res) => {
   const { item, quantity } = req.body;
-  console.log("item added: " + req.body);
   try {
     const newItem = new Inventory({ item, quantity });
     await newItem.save();

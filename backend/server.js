@@ -6,6 +6,7 @@ import authRoutes from './routes/authRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import inventoryRoutes from './routes/inventoryRoutes.js';
 import userRoutes from './routes/userRoutes.js'
+import pizzaRoutes from './routes/pizzaRoutes.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', inventoryRoutes);
 app.use('/api', userRoutes);
+app.use('/api/pizza', pizzaRoutes);
 
 // Error handler middleware
 app.use(errorHandler);

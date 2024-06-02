@@ -26,7 +26,6 @@ function AddItemForm() {
       if (!token) {
         throw new Error('Token not found');
       }
-
       const response = await axios.post('http://localhost:5000/api/inventory', formData, {
         headers: {
           Authorization: `Bearer ${token}`

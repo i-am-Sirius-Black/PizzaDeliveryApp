@@ -4,6 +4,10 @@ import mongoose from 'mongoose';
 
 
 const PizzaSchema = new mongoose.Schema({
+  pizzaName: {
+    type: String,
+    required: true,
+  },
   base: {
     type: String,
     required: true,

@@ -19,6 +19,11 @@ import ForgotPassword from './components/Auth/ForgotPassword';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import NotAuthorized from './components/Auth/NotAuthorized';
+import Inventory from './components/AdminDashboard/Inventory';
+import OrderManagementTable from './components/AdminDashboard/OrderManagementTable';
+import Pizza from './components/AdminDashboard/Pizza';
+import AddPizza from './components/AdminDashboard/AddPizza';
+import PizzasTable from './components/AdminDashboard/PizzasTable';
 
 
 function App() {
@@ -36,6 +41,21 @@ function App() {
         {
           path: 'admin',
           element: <Admin />
+        }
+        ,
+        {
+          path: 'inventory',
+          element: <Inventory />
+        }
+        ,
+        {
+          path: 'orders',
+          element: <OrderManagementTable />
+        }
+        ,
+        {
+          path: 'add-pizza',
+          element: <Pizza />
         }
         ,
         {

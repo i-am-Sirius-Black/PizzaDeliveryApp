@@ -44,7 +44,7 @@ function Navbar() {
         {isAdmin ? (
           <div className="w-full flex justify-center px-12 lg:flex-row">
           <div className="">
-            <a href="/" className="flex items-center w-[60px]">
+            <a href="/admin" className="flex items-center w-[60px]">
               <img className="rounded-full" src={logo} alt="Logo" />
             </a>
           </div>
@@ -55,7 +55,7 @@ function Navbar() {
             <ul className="flex items-center flex-col max-lg:gap-4 lg:mt-0 lg:ml-auto lg:flex-row">
               <li>
                 <a
-                  href="/"
+                  href="/inventory"
                   className="flex items-center justify-between text-sm lg:text-base font-bold hover:text-[#F8AA03] transition-all duration-500 lg:mr-6 md:mb-0 md:mr-3"
                 >
                   Item_Inventory
@@ -63,18 +63,18 @@ function Navbar() {
               </li>
               <li>
                 <a
-                  href="/menu"
+                  href="/add-pizza"
                   className="flex items-center justify-between text-sm lg:text-base font-bold hover:text-[#F8AA03] transition-all duration-500 lg:mr-6 md:mb-0 md:mr-3"
                 >
-                  Pizzas
+                  AddUpdatePizza
                 </a>
               </li>
               <li>
                 <a
-                  href="/about"
+                  href="/orders"
                   className="flex items-center justify-between text-sm lg:text-base font-bold hover:text-[#F8AA03] transition-all duration-500 lg:mr-6 md:mb-0 md:mr-3"
                 >
-                  Orders Table
+                  Orders_Management
                 </a>
               </li>
             </ul>
