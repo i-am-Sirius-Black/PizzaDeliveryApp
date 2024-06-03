@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Card,
   CardBody,
@@ -13,14 +13,17 @@ import {
   Box,
   Container,
 } from "@chakra-ui/react";
-
+import {PizzaContext} from '../context/PizzaContext'
 import pizza1 from "../assets/images/05.png";
 import pizza2 from "../assets/images/04.png";
 import pizza3 from "../assets/images/05.png";
+import BuyPizza from "../components/Modals/BuyPizza";
+
 
 function Menu() {
+  const {pizzas} = useContext(PizzaContext);
 
- const [isSwitched, setSwitch] = useState('true');
+  console.log("fething menu...pizzza ", pizzas);
 
   const menu = [
     {
@@ -77,46 +80,24 @@ function Menu() {
       price: "₹179",
     },
   ];
+  
   return (
-
-      // <Box className="mb-5 bg-[#FAFAFA]" as="section" p={4}>
-      //   <h1 className="text-center font-black text-6xl py-4 text-[#29361A] barlow-font text-[#29361A]">Standout Pizzas</h1>
-      //   <Container maxW="container" className="mt-2">
-      //     <Box display="flex" flexWrap="wrap" gap={8} justifyContent="center" className="">
-      //       {menu.map((item, index) => ( 
-      //         <Card className="transform transition-transform duration-300 hover:scale-105" key={index} width="15%" maxW="xs" borderRadius="2xl">
-      //           <CardBody className="p-0 flex flex-col items-center text-center text-white rounded-t-lg bg-zinc-700 text-white">
-      //             <Image src={item.imgSrc} alt={item.title} width="60%" maxW="" className="rounded-full"/>
-                  
-      //           </CardBody>
-      //           <Divider />
-      //           <CardFooter className="flex flex-col">
-      //           <Stack className="text-left" mt="2" mb="2" spacing="3">
-      //               <Heading size="sm">{item.title}</Heading>
-      //               <Text fontSize="xs">{item.description}</Text>
-      //           </Stack>
-      //             <ButtonGroup spacing="10" className="w-full flex items-center justify-between">
-      //             <Text className="font-bold" color="red.600" fontSize="lg">
-      //                 {item.price}
-      //               </Text>
-      //               <Button className="border-[1px] border-red-200" variant="ghost" colorScheme="red">
-      //                 Buy
-      //               </Button>
-      //             </ButtonGroup>
-      //           </CardFooter>
-      //         </Card>
-      //       ))}
-      //     </Box>
-      //   </Container>
-      // </Box>
-
-      <Box as="section" p={8} bg="#FAFAFA">
-      <Heading as="h1" textAlign="center" fontWeight="bold" fontSize="4xl" py={4} color="#29361A" className="barlow-font">
-        Standout Pizzas
+    <>
+    <Box as="section" p={8} bg="#FFF5EC">
+      <Heading
+        as="h1"
+        textAlign="center"
+        fontWeight="black"
+        fontSize="6xl"
+        pb="5"
+        color="#FFBC0D"
+        fontFamily="sans-serif"
+      >
+        Popular Pizza's
       </Heading>
       <Container maxW="container.xl" mt={4} mb={8}>
         <Box display="flex" flexWrap="wrap" gap={8} justifyContent="center">
-          {menu.map((item, index) => (
+          {pizzas.map((pizza, index) => (
             <Card
               key={index}
               width={{ base: "100%", sm: "45%", md: "30%", lg: "22%" }}
@@ -126,21 +107,41 @@ function Menu() {
               overflow="hidden"
               className="transform transition-transform duration-300 hover:scale-105"
             >
-              <CardBody p={0} className="bg-zinc-600">
-                <Image src={item.imgSrc} alt={item.title} objectFit="cover" w="100%" h="200px" />
+              <CardBody p={0} className="bg-[#F28739]">
+                <Image
+                  src={pizza1}
+                  alt={pizza.pizzaName}
+                  objectFit="cover"
+                  w="100%"
+                  h="200px"
+                />
               </CardBody>
-              <CardFooter p={4} className="bg-gray-50">
+              <CardFooter p={4} className="bg-gray-50 ">
                 <Stack spacing={3}>
-                  <Heading size="md" color="#29361A">{item.title}</Heading>
-                  <Text fontSize="sm" color="gray.600">{item.description}</Text>
+                  <Heading fontFamily="sans-serif" size="md" color="#D43807" className="text-center">
+                    {pizza.pizzaName}
+                  </Heading>
+                  {/* <Text fontFamily="sans-serif" fontSize="sm" color="gray.600" className="text-center">
+                    {pizza.description}
+                  </Text> */}
                   <Divider />
-                  <ButtonGroup spacing={4} className="w-full flex items-center justify-between">
-                    <Text fontWeight="bold" color="green.500" fontSize="lg">
-                      {item.price}
+                 
+                  <ButtonGroup
+                    fontFamily="sans-serif"
+                    spacing={1}
+                    className="w-full flex items-center justify-between"
+                  >
+                   <Text fontWeight="bold" color="green.500" fontSize="lg">
+                      {pizza.price}
                     </Text>
-                    <Button variant="solid" colorScheme="yellow"  _hover={{ bg: "yellow.300" }}>
-                      Buy Now
-                    </Button>
+              
+                    <button 
+                    class="font-bold bg-[#D43807] text-white hover:bg-[#c43003] hover:shadow py-2 px-4 rounded text-sm ml-2"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#pizzaBuyModel"
+                    >
+                      Order Now
+                    </button>
                   </ButtonGroup>
                 </Stack>
               </CardFooter>
@@ -149,6 +150,9 @@ function Menu() {
         </Box>
       </Container>
     </Box>
+
+    <BuyPizza/>
+    </>
   );
 }
 

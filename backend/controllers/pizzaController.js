@@ -46,13 +46,12 @@ export const updatePizza = async (req, res) => {
       {pizzaName, base, sauce, cheese, veggies},
       {new: true}
     )
-
     if (!updatedPizza){
       return res.status(404).json({success: false, message: 'Pizza not found'});
     }
-    res.status(200).json({success: true, message: 'Pizza Updated Successfully', updatePizza});
+    res.status(200).json({success: true,data:updatedPizza ,message: 'Pizza Updated Successfully', updatePizza});
   } catch (error) {
-    console.error('Failed to update pizza:', error);
+    console.error('Failed to update pizza (server):', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };

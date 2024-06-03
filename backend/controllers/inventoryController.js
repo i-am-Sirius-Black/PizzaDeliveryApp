@@ -17,10 +17,17 @@ export const getInventory = async (req, res) => {
   }
 };
 
+
+
+
+// Update the quantity of an existing inventory item
 export const updateInventory = async (req, res) => {
-  const { item, quantity } = req.body;
+  const {_id, item, quantity, price } = req.body;
+
+  console.log("update inventory server side=>  id: ", _id, " quantity: ", quantity, " price: ", price);
+
   try {
-    let inventoryItem = await Inventory.findOne({ item });
+    let inventoryItem = await Inventory.findById(_id);
 
     if (!inventoryItem) {
       return res.status(404).json({
@@ -29,7 +36,11 @@ export const updateInventory = async (req, res) => {
       });
     }
 
-    inventoryItem.quantity = quantity;
+    // Update the item fields
+    if (item !== undefined) inventoryItem.item = item.toLowerCase();
+    if (quantity !== undefined) inventoryItem.quantity = quantity;
+    if (price !== undefined) inventoryItem.price = price;
+
     await inventoryItem.save();
 
     res.status(200).json({
@@ -44,15 +55,39 @@ export const updateInventory = async (req, res) => {
   }
 };
 
+
+
+
+
+// Add a new inventory item or update the quantity if it already exists
 export const addInventoryItem = async (req, res) => {
-  const { item, quantity } = req.body;
+  const { item, quantity, price } = req.body;
   try {
-    const newItem = new Inventory({ item, quantity });
-    await newItem.save();
-    res.status(201).json({
-      success: true,
-      data: newItem,
-    });
+    const lowerCaseItem = item.toLowerCase(); // Convert item name to lowercase
+    let inventoryItem = await Inventory.findOne({ item: lowerCaseItem });
+
+    if (inventoryItem) {
+      // If the item already exists, update its quantity
+      inventoryItem.quantity += quantity;
+      if (price !== undefined) {
+        inventoryItem.price = price; // Update the price if provided
+      }
+      await inventoryItem.save();
+
+      res.status(200).json({
+        success: true,
+        data: inventoryItem,
+      });
+    } else {
+      // If the item does not exist, create a new inventory item
+      const newItem = new Inventory({ item: lowerCaseItem, quantity, price });
+      await newItem.save();
+
+      res.status(201).json({
+        success: true,
+        data: newItem,
+      });
+    }
   } catch (err) {
     res.status(400).json({
       success: false,
@@ -60,6 +95,7 @@ export const addInventoryItem = async (req, res) => {
     });
   }
 };
+
 
 export const deleteInventoryItem = async (req, res) => {
   const id = req.params.id;

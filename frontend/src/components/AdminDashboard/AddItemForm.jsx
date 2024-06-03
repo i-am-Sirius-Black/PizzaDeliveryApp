@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, FormControl, FormLabel, Input, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+// import { PizzaContext } from "../../context/PizzaContext";
 
 function AddItemForm() {
+
+  // const { addInventory} = useContext(PizzaContext);
+
   const [formData, setFormData] = useState({
     item: '',
-    quantity: ''
+    quantity: '',
+    price: '',
   });
 
   const handleInputChange = (e) => {
@@ -38,7 +43,8 @@ function AddItemForm() {
 
     setFormData({
       item: '',
-      quantity: ''
+      quantity: '',
+      price: '',
     });
   };
 
@@ -63,6 +69,21 @@ function AddItemForm() {
             name="quantity"
             placeholder="Qty:"
             value={formData.quantity}
+            onChange={handleInputChange}
+          />
+          <NumberInputStepper>
+            <NumberIncrementStepper />
+            <NumberDecrementStepper />
+          </NumberInputStepper>
+        </NumberInput>
+      </FormControl>
+      <FormControl className="py-2" isRequired>
+        <FormLabel>Price:</FormLabel>
+        <NumberInput min={1}>
+          <NumberInputField
+            name="price"
+            placeholder="₹:"
+            value={formData.price}
             onChange={handleInputChange}
           />
           <NumberInputStepper>

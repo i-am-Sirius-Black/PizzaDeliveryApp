@@ -1,194 +1,276 @@
+
+
 import React, { useState } from "react";
-import EditPizza from "../Modals/EditPizza";
+import Modal from "../Modal";
 
-const PizzasTable = ({ pizzas = [], editPizza, deletePizza }) => {
-  const [editingPizza, setEditingPizza] = useState(null);
+const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
 
-  // Function to handle editing pizza
-  const handleEditPizza = (pizza) => {
-    setEditingPizza(pizza); // Set the pizza being edited in the state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPizza, setCurrentPizza] = useState(null);
+  const [formData, setFormData] = useState({
+    _id: "",
+    pizzaName: "",
+    base: "",
+    sauce: "",
+    cheese: "",
+    veggies: [],
+  });
+
+  const handleEdit = (pizza) => {
+    setCurrentPizza(pizza);
+    setFormData(pizza);
+    setIsModalOpen(true);
   };
 
-  // Handle changes to the pizza being edited
-  const handleChange = (e) => {
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setCurrentPizza(null);
+    setFormData({
+      _id: "",
+      pizzaName: "",
+      base: "",
+      sauce: "",
+      cheese: "",
+      veggies: [],
+    });
+  };
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditingPizza({
-      ...editingPizza,
+    setFormData({
+      ...formData,
       [name]: value,
     });
   };
 
-  // Handle form submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // editPizza(editingPizza);
-    // setEditingPizza(null);
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      veggies: checked
+        ? [...prevFormData.veggies, value]
+        : prevFormData.veggies.filter((veggie) => veggie !== value),
+    }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    editPizza(formData);
+    handleCloseModal();
+  };
+
+  const handleDelete = (id) => {
+    deletePizza(id);
+  };
+
+  const veggiesOptions = [
+    "Tomatoes",
+    "Olives",
+    "Mushrooms",
+    "Onions",
+    "Peppers",
+    "Spinach",
+    "Basil",
+  ];
+
   return (
-    <>
-      <div className=" container p-5">
-        <table className="min-w-full divide-y divide-gray-200 border-2">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Pizza Name
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Base
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Sauce
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Cheese
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Veggies
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {pizzas.length > 0 ? (
-              pizzas.map((pizza) => (
-                <tr key={pizza._id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 ">
-                    {pizza.pizzaName}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {pizza.base}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {pizza.sauce}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {pizza.cheese}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {pizza.veggies.join(", ")}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <button
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      // onClick={() => editPizza(pizza._id)}
-                      onClick={() => handleEditPizza(pizza)}
-                      className="text-indigo-600 hover:text-indigo-900 mr-4"
-                    >
-                      Edit
-                    </button>
+    <div>
 
-                    <button
-                      onClick={() => deletePizza(pizza._id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan="6"
-                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center"
-                >
-                  No pizzas available.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* EditPIzza Models Starts HERE */}
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Edit This Pizza
-              </h1>
+<div className="overflow-x-auto">
+  <table className="min-w-full divide-y divide-gray-200 border-2">
+    <thead className="bg-gray-50">
+      <tr>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          No.
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Name
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Base
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Sauce
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Cheese
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Veggies
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody className="bg-white divide-y divide-gray-200">
+      {pizzas.length > 0 ? (
+        pizzas.map((pizza, index) => (
+          <tr key={pizza._id}>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {index}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {pizza.pizzaName}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {pizza.base}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {pizza.sauce}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {pizza.cheese}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {pizza.veggies.join(", ")}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <label
-                    htmlFor="pizzaName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Pizza Name
-                  </label>
-                  <input
-                    type="text"
-                    id="pizzaName"
-                    name="pizzaName"
-                    value={editingPizza ? editingPizza.pizzaName : ""}
-                    onChange={handleChange}
-                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Base:
-                  </label>
-                  {/* Add select field for pizza base */}
-                  <select
-                    required
-                    name="base"
-                    value={editingPizza ? editingPizza.base : ""}
-                    onChange={handleChange}
-                    className="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  >
-                    <option value="">Choose Base</option>
-                    <option value="Thin Crust">Thin Crust</option>
-                    <option value="Thick Crust">Thick Crust</option>
-                    <option value="Stuffed Crust">Stuffed Crust</option>
-                    <option value="Cheese Burst">Cheese Burst</option>
-                    <option value="Multigrain">Multigrain</option>
-                  </select>
-                </div>
-                {/* Add similar input fields for sauce, cheese, and veggies */}
-                <button
-                  type="submit"
-                  className="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600"
-                >
-                  Update Pizza
-                </button>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
+                onClick={() => handleEdit(pizza)}
+                className="text-indigo-600 hover:text-indigo-900 mr-4"
               >
-                Close
+                Edit
               </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
+              <button
+                onClick={() => handleDelete(pizza._id)}
+                className="text-red-600 hover:text-red-900"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td
+            colSpan="6"
+            className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center"
+          >
+            No pizzas available.
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
+
+
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <form onSubmit={handleSubmit} className="space-y-4 p-6 bg-white rounded shadow-lg">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> Pizza Name:
+            </label>
+            <input
+              required
+              type="text"
+              name="pizzaName"
+              value={formData.pizzaName}
+              onChange={handleInputChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> Base:
+            </label>
+            <select
+              required
+              name="base"
+              value={formData.base}
+              onChange={handleInputChange}
+              className="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose Base</option>
+              <option value="Thin Crust">Thin Crust</option>
+              <option value="Thick Crust">Thick Crust</option>
+              <option value="Stuffed Crust">Stuffed Crust</option>
+              <option value="Cheese Burst">Cheese Burst</option>
+              <option value="Multigrain">Multigrain</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> Sauce:
+            </label>
+            <select
+              required
+              name="sauce"
+              value={formData.sauce}
+              onChange={handleInputChange}
+              className="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose Sauce</option>
+              <option value="Tomato">Tomato</option>
+              <option value="BBQ">BBQ</option>
+              <option value="Pesto">Pesto</option>
+              <option value="Tandoori">Tandoori</option>
+              <option value="Alfredo">Pesto</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> Cheese:
+            </label>
+            <select
+              required
+              name="cheese"
+              value={formData.cheese}
+              onChange={handleInputChange}
+              className="mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value="">Choose Cheese</option>
+              <option value="Mozzarella">Mozzarella</option>
+              <option value="Cheddar">Cheddar</option>
+              <option value="Parmesan">Parmesan</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> Veggies:
+            </label>
+            <div className="mt-2 flex gap-2 flex-wrap">
+              {veggiesOptions.map((veggie) => (
+                <div key={veggie} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    name="veggies"
+                    value={veggie}
+                    checked={formData.veggies.includes(veggie)}
+                    onChange={handleCheckboxChange}
+                    className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                  />
+                  <label
+                    htmlFor={veggie}
+                    className="ml-2 block text-sm text-gray-900"
+                  >
+                    {veggie}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="pt-5">
+            <div className="flex justify-between">
+            <a
+                onClick={handleCloseModal}
+                className="btn ml-3 inline-flex items-center justify-center py-2 px-4 border  shadow-sm text-sm font-bold rounded-md text-white bg-red-500 hover:bg-red-600 hover:shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Close <span className="pl-2"><i class="ri-close-large-line"></i></span>
+              </a>
+
+              <button
+                type="submit"
+                className="ml-3 inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <span className="text-lg pr-2"><i class="ri-save-line"></i></span>Save Changes
               </button>
             </div>
           </div>
-        </div>
-      </div>
-      {/* EditPIzza Models ENDS HERE */}
-    </>
+        </form>
+      </Modal>
+    </div>
   );
 };
 
