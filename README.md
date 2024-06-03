@@ -29,6 +29,6 @@ Welcome to the Pizza Delivery App repository! This project is a web application 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request.
 
 ## Support
-For any questions or support, please contact [your email address].
+For any questions or support, please contact khanjaved.sk19@gmail.com.
 
 Enjoy ordering delicious pizzas with our app! 🍕
