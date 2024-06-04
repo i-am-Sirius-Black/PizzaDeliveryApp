@@ -99,7 +99,7 @@ function Navbar() {
                   <li>
                     <a
                       className="block px-6 py-2 hover:bg-gray-100 text-gray-900 font-medium"
-                      href="/downloads"
+                      href="/admin"
                     >
                       <h4 className="font-bold barlow-font text-green-300">
                         Hello' {user[0]}
