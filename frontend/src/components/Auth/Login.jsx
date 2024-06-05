@@ -56,7 +56,7 @@ function Login() {
       if (isAdmin) {
         navigate('/admin');
       } else {
-        navigate('/menu');
+        navigate('/');
       }
     } catch (error) {
       console.error('Login failed:', error);

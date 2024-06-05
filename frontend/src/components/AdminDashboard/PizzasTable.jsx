@@ -10,10 +10,12 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
   const [formData, setFormData] = useState({
     _id: "",
     pizzaName: "",
+    description: "",
     base: "",
     sauce: "",
     cheese: "",
     veggies: [],
+    price: "",
   });
 
   const handleEdit = (pizza) => {
@@ -28,10 +30,12 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
     setFormData({
       _id: "",
       pizzaName: "",
+      description: "",
       base: "",
       sauce: "",
       cheese: "",
       veggies: [],
+      price: "",
     });
   };
 
@@ -87,6 +91,9 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
           Name
         </th>
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Description
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
           Base
         </th>
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -95,8 +102,11 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
           Cheese
         </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+        <th className="px-6 py-3 text-left text-xs font-medium text-green-500 uppercase tracking-wider">
           Veggies
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+         ₹ Price
         </th>
         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
           Actions
@@ -114,6 +124,9 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
               {pizza.pizzaName}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {pizza.description}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
               {pizza.base}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
@@ -122,8 +135,11 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
               {pizza.cheese}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
               {pizza.veggies.join(", ")}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              {pizza.price}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
               <button
@@ -167,6 +183,19 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
               type="text"
               name="pizzaName"
               value={formData.pizzaName}
+              onChange={handleInputChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> Description:
+            </label>
+            <input
+              required
+              type="text"
+              name="description"
+              value={formData.description}
               onChange={handleInputChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
@@ -250,6 +279,19 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
                 </div>
               ))}
             </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> ₹ Price:
+            </label>
+            <input
+              required
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleInputChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
           </div>
           <div className="pt-5">
             <div className="flex justify-between">

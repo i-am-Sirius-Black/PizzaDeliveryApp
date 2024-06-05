@@ -9,6 +9,9 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [currentUserId, setCurrentUserId] =useState("")
+  const [userEmail, setUserEmail] =useState("")
+
 
   const token = Cookies.get("token");
 
@@ -17,6 +20,31 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       setIsLoggedIn(true);
     }
+  }, [token]);
+
+  useEffect(() => {
+    // Check UserId
+    const userInfo = async () => {
+      if (token) {
+        try {
+          const response = await axios.get("http://localhost:5000/api/user", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.data._id) { 
+            // console.log("responsedata: ", response.data);
+            console.log("responsedataID: ", response.data.email);
+            setCurrentUserId(response.data._id);
+            setUserEmail(response.data.email);
+          }
+        } catch (error) {
+          console.error("Failed to fetch userId:", error);
+        }
+      }
+    };
+
+    userInfo();
   }, [token]);
 
   useEffect(() => {
@@ -29,7 +57,7 @@ export const AuthProvider = ({ children }) => {
               Authorization: `Bearer ${token}`,
             },
           });
-          console.log(response.data.role);
+ 
           if ( response.data.role=== "admin") {
             setIsAdmin(true);
           }
@@ -54,7 +82,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isAdmin, login, logout }}>
+    <AuthContext.Provider value={{currentUserId, userEmail ,isLoggedIn, isAdmin, login, logout}}>
       {children}
     </AuthContext.Provider>
   );

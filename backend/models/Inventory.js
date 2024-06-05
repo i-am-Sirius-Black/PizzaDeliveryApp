@@ -1,6 +1,12 @@
+
+
 import mongoose from 'mongoose';
 
 const InventorySchema = new mongoose.Schema({
+  type: {
+    type: String,
+    required: true,
+  },
   item: {
     type: String,
     required: true,
@@ -15,7 +21,6 @@ const InventorySchema = new mongoose.Schema({
     required: true,
   },
 },{timestamps:true});
-
 
 const Inventory = mongoose.model('Inventory', InventorySchema);
 export default Inventory;

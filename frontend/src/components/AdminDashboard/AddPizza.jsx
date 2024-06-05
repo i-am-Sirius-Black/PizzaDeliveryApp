@@ -1,14 +1,14 @@
-
-
 import React, { useState } from "react";
 
 const AddPizza = ({ addPizza }) => {
   const [formData, setFormData] = useState({
     pizzaName: "",
+    description: "",
     base: "",
     sauce: "",
     cheese: "",
     veggies: [],
+    price: "",
   });
 
   const handleInputChange = (e) => {
@@ -34,13 +34,16 @@ const AddPizza = ({ addPizza }) => {
     addPizza(formData);
     setFormData({
       pizzaName: "",
+      description: "",
       base: "",
       sauce: "",
       cheese: "",
       veggies: [],
+      price: "",
     });
   };
 
+  //update this to fetch data from db with prices
   const veggiesOptions = [
     "Tomatoes",
     "Olives",
@@ -54,7 +57,10 @@ const AddPizza = ({ addPizza }) => {
   return (
     <div className="container w-full p-5 flex justify-center">
       <div className="form-card">
-        <form onSubmit={handleSubmit} className="space-y-4 p-6 bg-white rounded shadow-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 p-6 bg-white rounded shadow-lg"
+        >
           <div>
             <label className="block text-sm font-medium text-gray-700">
               <span className="text-red-500">*</span> Pizza Name:
@@ -64,6 +70,19 @@ const AddPizza = ({ addPizza }) => {
               type="text"
               name="pizzaName"
               value={formData.pizzaName}
+              onChange={handleInputChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> Description:
+            </label>
+            <input
+              required
+              type="text"
+              name="description"
+              value={formData.description}
               onChange={handleInputChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
@@ -146,6 +165,19 @@ const AddPizza = ({ addPizza }) => {
                 </div>
               ))}
             </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              <span className="text-red-500">*</span> ₹ Price:
+            </label>
+            <input
+              type="number"
+              required
+              name="price"
+              value={formData.price}
+              onChange={handleInputChange}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
           </div>
           <div className="pt-5">
             <div className="flex justify-end">

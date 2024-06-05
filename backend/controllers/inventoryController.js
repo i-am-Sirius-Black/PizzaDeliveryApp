@@ -18,13 +18,10 @@ export const getInventory = async (req, res) => {
 };
 
 
-
-
-// Update the quantity of an existing inventory item
 export const updateInventory = async (req, res) => {
-  const {_id, item, quantity, price } = req.body;
+  const { _id, type, item, quantity, price } = req.body;
 
-  console.log("update inventory server side=>  id: ", _id, " quantity: ", quantity, " price: ", price);
+  console.log("update inventory server side=> id: ", _id, " quantity: ", quantity, " price: ", price);
 
   try {
     let inventoryItem = await Inventory.findById(_id);
@@ -37,6 +34,7 @@ export const updateInventory = async (req, res) => {
     }
 
     // Update the item fields
+    if (type !== undefined) inventoryItem.type = type;
     if (item !== undefined) inventoryItem.item = item.toLowerCase();
     if (quantity !== undefined) inventoryItem.quantity = quantity;
     if (price !== undefined) inventoryItem.price = price;
@@ -55,13 +53,8 @@ export const updateInventory = async (req, res) => {
   }
 };
 
-
-
-
-
-// Add a new inventory item or update the quantity if it already exists
 export const addInventoryItem = async (req, res) => {
-  const { item, quantity, price } = req.body;
+  const { type, item, quantity, price } = req.body;
   try {
     const lowerCaseItem = item.toLowerCase(); // Convert item name to lowercase
     let inventoryItem = await Inventory.findOne({ item: lowerCaseItem });
@@ -69,6 +62,7 @@ export const addInventoryItem = async (req, res) => {
     if (inventoryItem) {
       // If the item already exists, update its quantity
       inventoryItem.quantity += quantity;
+      if (type !== undefined) inventoryItem.type = type;
       if (price !== undefined) {
         inventoryItem.price = price; // Update the price if provided
       }
@@ -80,7 +74,7 @@ export const addInventoryItem = async (req, res) => {
       });
     } else {
       // If the item does not exist, create a new inventory item
-      const newItem = new Inventory({ item: lowerCaseItem, quantity, price });
+      const newItem = new Inventory({ type, item: lowerCaseItem, quantity, price });
       await newItem.save();
 
       res.status(201).json({

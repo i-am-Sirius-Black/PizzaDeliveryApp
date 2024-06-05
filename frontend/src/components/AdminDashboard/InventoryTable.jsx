@@ -5,17 +5,17 @@ import Modal from "../Modal";
 function InventoryTable() {
   const { inventory, deleteInventory, editInventory } = useContext(PizzaContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [currentItem, setCurrentItem] = useState(null);
   const [formData, setFormData] = useState({
     _id:"",
+    type:"",
     item: "",
     quantity: "",
     price: "",
   });
 
-  const handleEdit = (item) => {
-    console.log("item: ",item);
-    setFormData(item);
+  const handleEdit = (itemData) => {
+    console.log("item: ",itemData);
+    setFormData(itemData);
     setIsModalOpen(true);
   };
 
@@ -23,6 +23,7 @@ function InventoryTable() {
     setIsModalOpen(false);
     setFormData({
       _id:"",
+      type:"",
       item: "",
       quantity: "",
       price: "",
@@ -36,8 +37,6 @@ function InventoryTable() {
       [name]: value,
     });
   };
-
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,12 +62,15 @@ function InventoryTable() {
               <table className="min-w-full rounded-xl">
                 <thead>
                   <tr className="bg-gray-50">
-                    <th className="p-5 text-left text-sm font-semibold text-gray-900 capitalize rounded-t-xl">
+                    <th className="p-5 text-left text-sm font-semibold text-blue-500 capitalize rounded-t-xl">
                       Name
                     </th>
+                    <th className="p-5 text-left text-sm font-semibold text-orange-500 capitalize rounded-t-xl">
+                      Type:
+                    </th>
                     {/* <th className="p-5 text-left text-sm font-semibold text-gray-900 capitalize">Type</th> */}
-                    <th className="p-5 text-left text-sm font-semibold text-gray-900 capitalize">
-                      Price
+                    <th className="p-5 text-left text-sm font-semibold text-green-600 capitalize">
+                      ₹Price
                     </th>
                     <th className="p-5 text-left text-sm font-semibold text-gray-900 capitalize">
                       Stock Quantity
@@ -87,9 +89,9 @@ function InventoryTable() {
                       <td className="px-5 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
                         {item.item}
                       </td>
-                      {/* <td className="px-5 py-2 whitespace-nowrap text-sm font-medium text-gray-900">{item.type}</td> */}
+                      <td className="px-5 py-2 whitespace-nowrap text-sm font-medium text-gray-900">{item.type}</td>
                       <td className="px-5 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {item.price}
+                        ₹{item.price}
                       </td>
                       <td className="px-5 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
                         {item.quantity <= 5

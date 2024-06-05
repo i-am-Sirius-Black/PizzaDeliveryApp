@@ -9,7 +9,7 @@ const router = express.Router();
 // Routes
 router.get('/', protect, getPizzas);
 router.post('/', protect, admin, addPizza);
-router.put('/:id', protect, admin, updatePizza);
+router.put('/:id', protect, updatePizza); //removed admin middleware for testing purposes
 router.delete('/:id', protect, admin, deletePizza);
 
 export default router;

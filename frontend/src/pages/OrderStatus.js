@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import pizzaMaking from '../assets/images/pizza-making.jpg'
+import { useLocation } from 'react-router-dom'
 
 function OrderStatus() {
+    const location = useLocation();
+
+    const { orderId, address, phone, amount } = location.state;
+  
+
+
   return (
     <div className='main w-full bg-[#f8fcfc]'>
         <div className="container w-4/5 h-[90vh] my-2 flex flex-col ">
@@ -21,20 +28,20 @@ function OrderStatus() {
                             <p className='mb-4 text-zinc-400'>The restaurant will confirm your order within a few minutes.</p>
                             <hr className='mb-4'/>
 
-                            <h4>Order Number:</h4>
-                            <p className='font-bold mb-2'>#123456</p>
+                            <h4>Order Id:</h4>
+                            <p className='font-bold mb-2'>#{orderId}</p>
 
                             <h4>Delivery Address:</h4>
-                            <p className='font-bold mb-2'>240/34A Nirala Nagar, Lucknow</p>
+                            <p className='font-bold mb-2'>{address}</p>
 
                             <h4>Contact Number:</h4>
-                            <p className='font-bold mb-2'>993840023</p>
+                            <p className='font-bold mb-2'>{phone}</p>
 
                             <h4>Payment:</h4>
-                            <p className='font-bold mb-2'>Credit Card</p>
+                            <p className='font-bold mb-2'>Online/Card</p>
 
                             <h4>Amount Paid:</h4>
-                            <p className='font-bold mb-2 text-blue-600'>₹910</p>
+                            <p className='font-bold mb-2 text-xl text-blue-600'>₹{amount}</p>
                         </div>
                     </div>
                 </div>

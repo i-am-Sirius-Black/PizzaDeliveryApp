@@ -8,6 +8,10 @@ const PizzaSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   base: {
     type: String,
     required: true,
@@ -22,6 +26,10 @@ const PizzaSchema = new mongoose.Schema({
   },
   veggies: {
     type: [String],
+    required: true,
+  },
+  price: {
+    type: Number,
     required: true,
   },
 });

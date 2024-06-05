@@ -13,8 +13,7 @@ function EditPizza({ pizza, editPizza }) {
   // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Call editPizza function to update the pizza with editedPizza state
-    // editPizza(editedPizza);
+
   };
 
   // Handle form field changes

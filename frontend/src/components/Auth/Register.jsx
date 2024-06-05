@@ -86,7 +86,7 @@ function Register() {
       // Save token and update login state
       login(response.data.token);
 
-      navigate('/menu');
+      navigate('/');
     } catch (error) {
       console.error('Registration failed:', error);
       // Optionally handle error

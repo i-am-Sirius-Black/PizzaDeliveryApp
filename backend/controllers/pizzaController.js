@@ -20,9 +20,9 @@ export const getPizzas = async (req, res) => {
 
 // Add a new pizza
 export const addPizza = async (req, res) => {
-  const {pizzaName, base, sauce, cheese, veggies} =req.body;
+  const {pizzaName, description, base, sauce, cheese, veggies, price} =req.body;
   try {
-    const newPizza = new Pizza({pizzaName, base, sauce, cheese, veggies});
+    const newPizza = new Pizza({pizzaName, description, base, sauce, cheese, veggies, price});
     await newPizza.save();
     res.status(201).json({
       success: true,
@@ -39,11 +39,11 @@ export const addPizza = async (req, res) => {
 // Update a pizza
 export const updatePizza = async (req, res) => {
   const {id} = req.params;
-  const {pizzaName, base, sauce, cheese, veggies} = req.body;
+  const {pizzaName, description, base, sauce, cheese, veggies, price} = req.body;
   try {
     const updatedPizza = await Pizza.findOneAndUpdate(
       {_id: id},
-      {pizzaName, base, sauce, cheese, veggies},
+      {pizzaName, description, base, sauce, cheese, veggies, price},
       {new: true}
     )
     if (!updatedPizza){

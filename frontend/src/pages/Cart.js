@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import pizzaImg from "../assets/images/05.png";
 import OrderDetails from "../components/UserDashboard/OrderDetails";
 import {
@@ -8,8 +8,39 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Cart() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // const [currentValue, setCurrentValue] = useState(1);
+  const [isLoading, setIsLoading] = useState(true); 
+  const [orderedPizza, setOrderedPizza] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+  
+      const response = await new Promise((resolve) =>
+        setTimeout(() => resolve(location.state?.pizza), 1000)
+      );
+      setOrderedPizza(response);
+      setIsLoading(false); 
+    };
+
+    fetchData();
+  }, [location]);
+
+  if (isLoading) {
+    return <p>Loading your pizza...</p>;
+  }
+
+  const handleCheckout=() => {
+    navigate("/checkout", { state:  orderedPizza, })
+  }
+
+const gst =orderedPizza.price*0.05;
+
   return (
     <>
       <section className="Basket">
@@ -69,44 +100,51 @@ function Cart() {
                                     </div>
                                   </td>
                                   <td class="p-5 whitespace-nowrap text-sm leading-6 text-gray-900">
-                                    <div className="font-bold text-xl mb-2 barlow-font">
-                                      Meatball Pizza
+                                    <div className="font-bold text-2xl text-red-400 mb-2 barlow-font">
+                                      {orderedPizza.pizzaName}
                                     </div>
                                     <div>
                                       <h5 className="font-bold text-zinc-700 roboto-font">
-                                        Pizza Size:-
+                                        Pizza Base:-
                                       </h5>
-                                      <p>12 Inch</p>
+                                      <p>{orderedPizza.base}</p>
                                     </div>
                                     <div>
                                       <h5 className="font-bold text-zinc-700 roboto-font">
                                         Pizza Sauce:-
                                       </h5>
-                                      <p>Marinara Sauce</p>
+                                      <p>{orderedPizza.sauce}</p>
                                     </div>
                                     <div>
                                       <h5 className="font-bold text-zinc-700 roboto-font">
                                         Cheese Type:-
                                       </h5>
-                                      <p>Goat Cheese</p>
+                                      <p>{orderedPizza.cheese}</p>
                                     </div>
                                     <div>
                                       <h5 className="font-bold text-zinc-700 roboto-font">
                                         Veggies:-
                                       </h5>
-                                      <p>Capsicum, Tomamto, Garlic</p>
+                                      <span>{orderedPizza.veggies.join(', ')}</span>
+                                      {/* {orderedPizza.veggies.map(
+                                        (veggie, index) => (
+                                          <p key={index}>{veggie}</p>
+                                        )
+                                      )} */}
                                     </div>
                                   </td>
                                   <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                                    ₹550
+                                    ₹{orderedPizza.price}
                                   </td>
                                   <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
                                     <NumberInput
                                       size="sm"
+                                      // onChange={handleQtyChange}
                                       maxW={20}
                                       defaultValue={1}
                                       min={1}
-                                      max={10}
+                                      max={1}
+                                      // value={currentValue !== undefined ? currentValue : 1}
                                     >
                                       <NumberInputField />
                                       <NumberInputStepper>
@@ -116,7 +154,7 @@ function Cart() {
                                     </NumberInput>
                                   </td>
                                   <td class="p-5 whitespace-nowrap text-sm leading-6 font-medium text-gray-900">
-                                    ₹550
+                                  ₹{orderedPizza.price}
                                   </td>
                                 </tr>
                               </tbody>
@@ -141,21 +179,21 @@ function Cart() {
                   <tbody>
                     <tr className="flex justify-around">
                       <th className="p-2">Subtotal</th>
-                      <td className="p-2">₹150</td>
+                      <td className="p-2">₹{orderedPizza.price}</td>
                     </tr>
                     <tr className="flex justify-around">
                       <th className="p-2">Gst-5%</th>
-                      <td className="p-2">₹7.5</td>
+                      <td className="p-2">₹{gst}</td>
                     </tr>
                     <tr className="flex justify-around font-bold">
                       <th className="p-2">Total</th>
-                      <td className="p-2">₹157.5</td>
+                      <td className="p-2">₹{orderedPizza.price+gst}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <a
-                href="/checkout"
+                onClick={handleCheckout}
                 className="checkout-btn p-2 mt-2 rounded-[2px] flex justify-around items-center bg-[#7ED321] hover:bg-green-600 hover:text-white w-full h-[60px] text-zinc-700 font-bold text-2xl roboto-font"
               >
                 <h2 className="">Proceed to checkout</h2>

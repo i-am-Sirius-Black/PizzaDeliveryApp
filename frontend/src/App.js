@@ -25,6 +25,7 @@ import OrderManagementTable from "./components/AdminDashboard/OrderManagementTab
 import Pizza from "./components/AdminDashboard/Pizza";
 import AddPizza from "./components/AdminDashboard/AddPizza";
 import PizzasTable from "./components/AdminDashboard/PizzasTable";
+import CustomizePizza from "./pages/CustomizePizza";
 
 function App() {
   const router = createBrowserRouter([
@@ -79,6 +80,11 @@ function App() {
         {
           path: "/resetpassword/:resetToken",
           element: <ResetPassword />,
+        },
+        ,
+        {
+          path: "/customize-pizza",
+          element: <CustomizePizza />,
         },
         {
           path: "status",
