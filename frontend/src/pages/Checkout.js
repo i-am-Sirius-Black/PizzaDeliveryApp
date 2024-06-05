@@ -44,88 +44,18 @@ function Checkout() {
     return () => script.remove();
   }, []);
 
-  // const handlePlaceOrder = async () => {
-  //   if (mode !== "2") {
-  //     navigate("/status", { state: orderedPizza }); 
-  //     console.log("sending to status: " + orderedPizza);
-  //     return;
-  //   }
-
-  //   if (!isRazorpayLoaded) {
-  //     console.error("Razorpay is not loaded yet.");
-  //     return;
-  //   }
-
-  //   const totalPrice = orderedPizza.price;
-
-  //   try {
-  //     // Fetch the order ID from the server
-  //     const orderResponse = await axios.post('http://localhost:5000/api/order', { amount: totalPrice });
-  //     const orderId = orderResponse.data.orderId;
-      
-
-  //     const options = {
-  //       key: "rzp_test_FnYlcIVeGU6aFM", // razorpay id , put it in .env
-  //       amount: totalPrice * 100, 
-  //       currency: "INR",
-  //       name: "Pizza Delivery",
-  //       description: `Order for ${orderedPizza.pizzaName}`,
-  //       order_id: orderId,
-  //       prefill: {
-  //         name: address.name,
-  //         email: userEmail, 
-  //         contact: address.phone,
-  //       },
-  //       theme: {
-  //         color: "#333333",
-  //       },
-  //       handler: async (response) => {
-  //         try {
-  //           console.log("response: ", response);
-  //           console.log("Payment ID: ", response.razorpay_payment_id);
-  //           console.log("Order ID: ", response.razorpay_order_id);
-  //           console.log("Signature: ", response.razorpay_signature);
-
-  //           const verificationData = {
-  //             razorpay_payment_id: response.razorpay_payment_id,
-  //             razorpay_order_id: response.razorpay_order_id,
-  //             razorpay_signature: response.razorpay_signature,
-  //           };
-
-  //           const verificationResponse = await axios.post('http://localhost:5000/api/verify', verificationData, {
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //             },
-  //           });
-
-  //           if (verificationResponse.data.status === "authorized") {
-  //             console.log("Payment successful!");
-  //             alert("Payment successful! Your order is confirmed.");
-  //           } else {
-  //             console.error("Payment verification failed:", verificationResponse.data);
-  //             alert("Payment failed. Please try again.");
-  //           }
-  //         } catch (error) {
-  //           console.error("Error verifying payment:", error);
-  //           alert("An error occurred during payment verification. Please try again.");
-  //         }
-  //       },
-  //     };
-
-  //     const rzp = new window.Razorpay(options);
-  //     rzp.open();
-  //   } catch (error) {
-  //     console.error("Error creating Razorpay order:", error);
-  //     alert("An error occurred while creating the payment order. Please try again.");
-  //   }
-  // };
-
 
   const handlePlaceOrder = async () => {
-    if (mode !== "2") {
-      navigate("/status", { state: orderedPizza });
-      console.log("sending to status: " + orderedPizza);
+    // if (mode !== "2") {
+    //   navigate("/status", { state: orderedPizza });
+    //   console.log("sending to status: " + orderedPizza);
+    // }
+
+    if (!address.name || !address.phone || !address.pincode || !address.flat || !address.area || !address.landmark || !address.city) {
+      alert("Please fill in all the address fields.");
+      return;
     }
+
     if (!isRazorpayLoaded) {
       console.error("Razorpay is not loaded yet.");
       return;
@@ -184,9 +114,9 @@ function Checkout() {
             navigate("/status", {
               state: {
                 orderId: verificationResponse.data.orderId,
-                address: verificationResponse.data.address,
-                phone: verificationResponse.data.phone,
-                amount: verificationResponse.data.amount,
+                // address: verificationResponse.data.address,
+                // phone: verificationResponse.data.phone,
+                // amount: verificationResponse.data.amount,
               },
             }); // Redirect to status page with data
           } else {
@@ -308,12 +238,6 @@ function Checkout() {
       placeholder="Town/City"
       onChange={handleAddressChange}
     />
-                  <button
-                    type="submit"
-                    className="bg-blue-400 hover:bg-blue-500 text-white font-semibold w-1/4 h-[30px] rounded-[3px]"
-                  >
-                    Save Details
-                  </button>
                 </FormControl>
               </div>
             </div>
@@ -391,10 +315,10 @@ function Checkout() {
                     value={mode}
                   >
                     <Stack direction="column">
-                      <Radio colorScheme="blue" value="1">
+                      {/* <Radio colorScheme="blue" value="1">
                         Cash On Delivery
-                      </Radio>
-                      <Radio colorScheme="green" value="2">
+                      </Radio> */}
+                      <Radio colorScheme="green" value="1">
                         Credit / Debit Card
                       </Radio>
                     </Stack>

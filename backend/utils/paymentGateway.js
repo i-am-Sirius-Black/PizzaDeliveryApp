@@ -33,66 +33,6 @@ export const createOrderId = async (req, res) => {
   }
 }
 
-// export const createOrder = async (req, res) => {
-//   const { pizzaId, userId, address, phone, amount } = req.body;
-//   console.log(pizzaId," ",userId," ",address," ",phone," ",amount);
-//   try {
-//     const pizza = await Pizza.findById(pizzaId);
-//     if (!pizza) {
-//       return res.status(404).json({
-//         success: false,
-//         error: 'Pizza not found',
-//       });
-//     }
-//     const user = await User.findById(userId);
-//     if (!user) {
-//       return res.status(404).json({
-//         success: false,
-//         error: 'User not found',
-//       });
-//     }
-
-//     const order = await Order.create({
-//       user: userId,
-//       pizza: pizzaId,
-//       address,
-//       phone,
-//       amount,
-//     });
-
-//     res.status(201).json({
-//       success: true,
-//       data: order,
-//     });
-//   } catch (err) {
-//     res.status(400).json({
-//       success: false,
-//       error: err.message,
-//     });
-//   }
-// };
-
-// export const verifyPayment = async (req, res) => {
-//   const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
-
-
-//   console.log('Verification Request Body:', req.body);
-
-//   if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
-//     return res.status(400).json({ status: "unauthorized", error: "Missing fields" });
-//   }
-
-//   const hmac = crypto.createHmac('sha256', RazorpayKeySecret);
-//   hmac.update(`${razorpay_order_id}|${razorpay_payment_id}`);
-//   const generated_signature = hmac.digest('hex');
-
-//   if (generated_signature === razorpay_signature) {
-//     res.json({ status: "authorized" });
-//   } else {
-//     res.status(400).json({ status: "unauthorized" });
-//   }
-// };
-
 
 export const verifyPayment = async (req, res) => {
   const { razorpay_payment_id, razorpay_order_id, razorpay_signature, amount, address, phone, userId, pizzaId } = req.body;
@@ -116,7 +56,7 @@ export const verifyPayment = async (req, res) => {
         phone,
         amount,
         razorpay_payment_id,
-        status: 'paid',
+        status: 'Order Received',  //will set when payment is received
       });
       await order.save();
     } else {

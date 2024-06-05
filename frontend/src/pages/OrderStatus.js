@@ -1,13 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import pizzaMaking from '../assets/images/pizza-making.jpg'
 import { useLocation } from 'react-router-dom'
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 function OrderStatus() {
-    const location = useLocation();
+const {currentUserId} = useContext(AuthContext);
+const [orderData, setOrderData] = useState([]);
 
-    const { orderId, address, phone, amount } = location.state;
+
+    const token = Cookies.get('token');
   
-
+ useEffect(() => {
+    const fetchOrderData = async () => {
+      try {
+        if (!token) {
+          console.log("Token not found, not logged in?");
+          return;
+        }
+        const respose = await axios.get(`http://localhost:5000/api/getOrder/${currentUserId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const orderDataResponse = respose.data.data[0];
+        console.log("orderDataRespose", orderDataResponse);
+        setOrderData(orderDataResponse);
+      } catch (error) {
+        console.error("Error fetching order data:", error);
+      }
+    }
+    fetchOrderData();
+},[]);
 
   return (
     <div className='main w-full bg-[#f8fcfc]'>
@@ -24,24 +49,25 @@ function OrderStatus() {
                             <img className='rounded-l-xl' src={pizzaMaking} alt="pizza making" />
                         </div>
                         <div className="summary w-3/4 p-4 ">
-                            <h1 className='text-2xl mb-1 font-bold text-green-700'>Your order is being processed...</h1>
-                            <p className='mb-4 text-zinc-400'>The restaurant will confirm your order within a few minutes.</p>
+                            <h1 className='text-2xl mb-1 font-bold text-green-700'>Order Status:{orderData.status}</h1>
+                            {/*CUtomise this paragraph based on order status*/}
+                            {/* <p className='mb-4 text-zinc-400'>The restaurant will confirm your order within a few minutes.</p> */}
                             <hr className='mb-4'/>
 
                             <h4>Order Id:</h4>
-                            <p className='font-bold mb-2'>#{orderId}</p>
+                            <p className='font-bold mb-2'>#{orderData._id}</p>
 
                             <h4>Delivery Address:</h4>
-                            <p className='font-bold mb-2'>{address}</p>
+                            <p className='font-bold mb-2'>{orderData.address}</p>
 
                             <h4>Contact Number:</h4>
-                            <p className='font-bold mb-2'>{phone}</p>
+                            <p className='font-bold mb-2'>{orderData.phone}</p>
 
                             <h4>Payment:</h4>
                             <p className='font-bold mb-2'>Online/Card</p>
 
                             <h4>Amount Paid:</h4>
-                            <p className='font-bold mb-2 text-xl text-blue-600'>₹{amount}</p>
+                            <p className='font-bold mb-2 text-xl text-blue-600'>₹{orderData.amount}</p>
                         </div>
                     </div>
                 </div>

@@ -91,25 +91,25 @@ function Menu() {
                     </Text>
                     <Divider />
 
-                    <div className="card-footer flex items-center">
+                    <div className="card-footer flex justify-between items-center">
                       <Text fontWeight="bold" color="green.500" fontSize="lg">
                         ₹{pizza.price}
                       </Text>
 
-                      <div className="btn-grp flex">
-                        <Button
-                          type="button"
-                          colorScheme="orange"
+                      <div className="flex justify-between gap-4">
+                        <button
+                          className=" bg-transparent border-1 border-yellow-400 p-2 rounded text-yellow-400 font-bold hover:shadow-xl"
                           onClick={() => handleCustomizeClick(pizza)}
                         >
                           Customize
-                        </Button>
-                        <Button
-                          colorScheme="blue"
+                        </button>
+                        <button
+                          className="bg-yellow-400 p-2 rounded text-white font-bold hover:shadow-xl"
                           onClick={() => handleOrderClick(pizza)}
                         >
                           Order
-                        </Button>
+                        </button>
+
                       </div>
                     </div>
                   </Stack>
