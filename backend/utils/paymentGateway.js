@@ -35,8 +35,8 @@ export const createOrderId = async (req, res) => {
 
 
 export const verifyPayment = async (req, res) => {
-  const { razorpay_payment_id, razorpay_order_id, razorpay_signature, amount, address, phone, userId, pizzaId } = req.body;
-  console.log(razorpay_payment_id," ",razorpay_order_id," ",razorpay_signature," ",amount," ",address," ",phone," ",userId," ",pizzaId);
+  const { razorpay_payment_id, razorpay_order_id, razorpay_signature, amount, address, phone, userId, pizzaId, customizations } = req.body;
+  console.log(razorpay_payment_id, razorpay_order_id, razorpay_signature, amount, address, phone, userId, pizzaId, customizations);
 
   if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
     return res.status(400).json({ status: "unauthorized", error: "Missing fields" });
@@ -56,7 +56,8 @@ export const verifyPayment = async (req, res) => {
         phone,
         amount,
         razorpay_payment_id,
-        status: 'Order Received',  //will set when payment is received
+        status: 'Order Received',  // will set when payment is received
+        customizations, // Include customizations here
       });
       await order.save();
     } else {
@@ -65,6 +66,7 @@ export const verifyPayment = async (req, res) => {
       order.amount = amount;
       order.address = address;
       order.phone = phone;
+      order.customizations = customizations; // Include customizations here
       await order.save();
     }
 
@@ -73,3 +75,46 @@ export const verifyPayment = async (req, res) => {
     res.status(400).json({ status: "unauthorized" });
   }
 };
+
+
+
+
+// export const verifyPayment = async (req, res) => {
+//   const { razorpay_payment_id, razorpay_order_id, razorpay_signature, amount, address, phone, userId, pizzaId } = req.body;
+//   console.log(razorpay_payment_id," ",razorpay_order_id," ",razorpay_signature," ",amount," ",address," ",phone," ",userId," ",pizzaId);
+
+//   if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
+//     return res.status(400).json({ status: "unauthorized", error: "Missing fields" });
+//   }
+
+//   const hmac = crypto.createHmac('sha256', RazorpayKeySecret);
+//   hmac.update(`${razorpay_order_id}|${razorpay_payment_id}`);
+//   const generated_signature = hmac.digest('hex');
+
+//   if (generated_signature === razorpay_signature) {
+//     let order = await Order.findOne({ razorpay_order_id });
+//     if (!order) {
+//       order = new Order({
+//         user: userId,
+//         pizza: pizzaId,
+//         address,
+//         phone,
+//         amount,
+//         razorpay_payment_id,
+//         status: 'Order Received',  //will set when payment is received
+//       });
+//       await order.save();
+//     } else {
+//       order.status = 'paid';
+//       order.razorpay_payment_id = razorpay_payment_id;
+//       order.amount = amount;
+//       order.address = address;
+//       order.phone = phone;
+//       await order.save();
+//     }
+
+//     res.json({ status: "authorized", orderId: order._id, address: order.address, phone: order.phone, amount: order.amount });
+//   } else {
+//     res.status(400).json({ status: "unauthorized" });
+//   }
+// };

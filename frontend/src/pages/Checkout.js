@@ -44,7 +44,7 @@ function Checkout() {
     return () => script.remove();
   }, []);
 
-
+  console.log("orderedPIzza ",orderedPizza);
   const handlePlaceOrder = async () => {
     // if (mode !== "2") {
     //   navigate("/status", { state: orderedPizza });
@@ -91,6 +91,14 @@ function Checkout() {
           alert("Incomplete payment response. Please try again.");
           return;
         }
+
+        const customizations = {
+          base: orderedPizza.base,
+          sauce: orderedPizza.sauce,
+          cheese: orderedPizza.cheese,
+          veggies: orderedPizza.veggies,
+        };
+
           const verificationData = {
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
@@ -100,6 +108,7 @@ function Checkout() {
             phone: address.phone,
             userId: currentUserId,
             pizzaId: orderedPizza._id,
+            customizations,
           };
   
           const verificationResponse = await axios.post('http://localhost:5000/api/verify', verificationData, {

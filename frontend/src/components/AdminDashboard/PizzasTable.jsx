@@ -1,10 +1,7 @@
-
-
 import React, { useState } from "react";
 import Modal from "../Modal";
 
 const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPizza, setCurrentPizza] = useState(null);
   const [formData, setFormData] = useState({
@@ -78,102 +75,103 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
   ];
 
   return (
-    <div>
-
-<div className="overflow-x-auto">
-  <table className="min-w-full divide-y divide-gray-200 border-2">
-    <thead className="bg-gray-50">
-      <tr>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-          No.
-        </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-          Name
-        </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-          Description
-        </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-          Base
-        </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-          Sauce
-        </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-          Cheese
-        </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-green-500 uppercase tracking-wider">
-          Veggies
-        </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-         ₹ Price
-        </th>
-        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-          Actions
-        </th>
-      </tr>
-    </thead>
-    <tbody className="bg-white divide-y divide-gray-200">
-      {pizzas.length > 0 ? (
-        pizzas.map((pizza, index) => (
-          <tr key={pizza._id}>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {index}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {pizza.pizzaName}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {pizza.description}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {pizza.base}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {pizza.sauce}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {pizza.cheese}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
-              {pizza.veggies.join(", ")}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-              {pizza.price}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <button
-                onClick={() => handleEdit(pizza)}
-                className="text-indigo-600 hover:text-indigo-900 mr-4"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(pizza._id)}
-                className="text-red-600 hover:text-red-900"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))
-      ) : (
-        <tr>
-          <td
-            colSpan="6"
-            className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center"
-          >
-            No pizzas available.
-          </td>
-        </tr>
-      )}
-    </tbody>
-  </table>
-</div>
-
+    <div className="container w-full">
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200 border-2">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                No.
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Name
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Description
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Base
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Sauce
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Cheese
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-green-500 uppercase tracking-wider">
+                Veggies
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                Price
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {pizzas.length > 0 ? (
+              pizzas.map((pizza, index) => (
+                <tr key={pizza._id}>
+                  <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-900">
+                    {index}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-900">
+                    {pizza.pizzaName}
+                  </td>
+                  <td className="px-6 py-4 whitespace-wrap text-xs text-gray-900">
+                    {pizza.description}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-900">
+                    {pizza.base}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-900">
+                    {pizza.sauce}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-xs text-gray-900">
+                    {pizza.cheese}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-xs text-green-600">
+                    {pizza.veggies.join(", ")}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap font-bold text-xs text-red-700">
+                    ₹{pizza.price}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-xs font-medium">
+                    <button
+                      onClick={() => handleEdit(pizza)}
+                      className="text-indigo-600 hover:text-indigo-900 mr-4"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(pizza._id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="6"
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center"
+                >
+                  No pizzas available.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <form onSubmit={handleSubmit} className="space-y-4 p-6 bg-white rounded shadow-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 p-6 bg-white rounded shadow-lg"
+        >
           <div>
             <label className="block text-sm font-medium text-gray-700">
               <span className="text-red-500">*</span> Pizza Name:
@@ -295,18 +293,24 @@ const PizzasTable = ({ pizzas, editPizza, deletePizza }) => {
           </div>
           <div className="pt-5">
             <div className="flex justify-between">
-            <a
+              <a
                 onClick={handleCloseModal}
                 className="btn ml-3 inline-flex items-center justify-center py-2 px-4 border  shadow-sm text-sm font-bold rounded-md text-white bg-red-500 hover:bg-red-600 hover:shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Close <span className="pl-2"><i class="ri-close-large-line"></i></span>
+                Close{" "}
+                <span className="pl-2">
+                  <i class="ri-close-large-line"></i>
+                </span>
               </a>
 
               <button
                 type="submit"
                 className="ml-3 inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                <span className="text-lg pr-2"><i class="ri-save-line"></i></span>Save Changes
+                <span className="text-lg pr-2">
+                  <i class="ri-save-line"></i>
+                </span>
+                Save Changes
               </button>
             </div>
           </div>

@@ -1,6 +1,3 @@
-// models/Order.js
-
-
 // import mongoose from 'mongoose';
 
 // const OrderSchema = new mongoose.Schema({
@@ -14,9 +11,25 @@
 //     ref: 'Pizza',
 //     required: true,
 //   },
+//   address: {
+//     type: String,
+//     required: true,
+//   },
+//   phone: {
+//     type: String,
+//     required: true,
+//   },
+//   amount: {
+//     type: Number,
+//     required: true,
+//   },
+//   razorpay_payment_id: {
+//     type: String,
+//     required: true,
+//   },
 //   status: {
 //     type: String,
-//     enum: ['Order Received', 'In the Kitchen', 'Out for Delivery', 'Delivered'],
+//     enum: ['Order Received', 'In the Kitchen', 'Out for Delivery', 'Delivered', 'paid'],
 //     default: 'Order Received',
 //   },
 //   createdAt: {
@@ -25,15 +38,32 @@
 //   },
 // });
 
-
 // const Order = mongoose.model('Order', OrderSchema);
 
 // export default Order;
 
 
-// models/Order.js
-
 import mongoose from 'mongoose';
+
+const CustomizationsSchema = new mongoose.Schema({
+  base: {
+    type: String,
+    required: true,
+  },
+  sauce: {
+    type: String,
+    required: true,
+  },
+  cheese: {
+    type: String,
+    required: true,
+  },
+  veggies: {
+    type: [String],
+    required: true,
+  },
+});
+
 
 const OrderSchema = new mongoose.Schema({
   user: {
@@ -71,10 +101,12 @@ const OrderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  customizations: {
+    type: CustomizationsSchema,
+    required: true,
+  },
 });
 
 const Order = mongoose.model('Order', OrderSchema);
 
 export default Order;
-
-

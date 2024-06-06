@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
           });
           if (response.data._id) { 
             // console.log("responsedata: ", response.data);
-            console.log("responsedataID: ", response.data.email);
+            console.log("responsedataID: ", response.data._id);
             setCurrentUserId(response.data._id);
             setUserEmail(response.data.email);
           }

@@ -7,8 +7,6 @@ import OrderManagementTable from '../components/AdminDashboard/OrderManagementTa
 function Admin() {
   return (
     <section className="w-full">
-        <AddItemForm />
-      <InventoryTable />
       <OrderManagementTable />
     </section>
   );

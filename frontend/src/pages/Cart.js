@@ -39,7 +39,7 @@ function Cart() {
     navigate("/checkout", { state:  orderedPizza, })
   }
 
-const gst =orderedPizza.price*0.05;
+const gst =Math.floor(orderedPizza.price*0.05);
 
   return (
     <>
