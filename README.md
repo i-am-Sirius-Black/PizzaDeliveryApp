@@ -2,6 +2,13 @@
 
 Welcome to the Pizza Delivery App repository! This project is a web application built using the MERN stack, allowing users to order pizzas online. Below is a guide on how to navigate and use the application.
 
+## Screenshots:
+![Screenshot 2024-06-16 230541](https://github.com/user-attachments/assets/cb1f6f2e-02b3-4f6c-97c2-a60373e59a00)
+![Screenshot 2024-06-16 230551](https://github.com/user-attachments/assets/9c6f2aad-be34-4aee-a5ae-e4ed9ecc911f)
+![Screenshot 2024-06-16 230559](https://github.com/user-attachments/assets/bcea2e10-26dd-4381-add9-671a15081b50)
+![Screenshot 2024-06-16 230605](https://github.com/user-attachments/assets/54850bf7-713d-437b-85e3-55af3960e169)
+
+
 ## Features
 - **User Authentication:** Users can register and log in to their accounts.
 - **Pizza Customization:** Users can customize their pizza orders by choosing the base, sauce, cheese, and toppings.
